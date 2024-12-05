@@ -2,7 +2,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Scanner;
 
-class Casilla{
+public class Casilla{
     private int x,y;
     private char elemento;
 

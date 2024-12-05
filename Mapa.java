@@ -7,12 +7,13 @@ import java.awt.*;
 import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
 
-class Mapa extends JPanel implements KeyListener{
+public class Mapa extends JPanel implements KeyListener{
     private int size_x;
     private int size_y;
     private ArrayList<Casilla> casillas;
     private int tamanho_celda;
     private Personaje personaje;
+    private ArrayList<Item> items;
 
     public Mapa(){
         size_x = 20;
@@ -20,7 +21,7 @@ class Mapa extends JPanel implements KeyListener{
         casillas = new ArrayList<>(size_x * size_y);
         tamanho_celda = 40;
         personaje = new Personaje();
-
+        items = new ArrayList<>();
         setFocusable(true);
         addKeyListener(this);
     }
@@ -31,7 +32,7 @@ class Mapa extends JPanel implements KeyListener{
         casillas = new ArrayList<>(size_x * size_y);
         tamanho_celda = 40;
         personaje = new Personaje();
-
+        items = new ArrayList<>();
         setFocusable(true);
         addKeyListener(this);
     }
@@ -42,11 +43,41 @@ class Mapa extends JPanel implements KeyListener{
         return null;
     }
 
+    public void cargarItems(Scanner arch) {
+        while (arch.hasNext()) {
+            String tipo = arch.next();
+            Item item;
+            if (tipo.compareTo("Salud") == 0) {
+                item = new PosionSalud();
+                item.leer(arch);
+                items.add(item);
+            }
+        }
+    }
+
     public void crear(Scanner arch){
         while(arch.hasNext()){
             Casilla cas = new Casilla();
             cas.leer(arch);
             casillas.add(cas);
+        }
+    }
+
+    public void verificarColisionConItems(Personaje personaje) {
+        int x = personaje.GetPosX_Inicial();
+        int y = personaje.GetPosY_Inicial();
+        Item itemToRemove = null;
+    
+        for (Item item : items) {
+            if (item.GetX() == x && item.GetY() == y) {
+                item.interactuar(personaje);
+                itemToRemove = item;
+                break;
+            }
+        }
+    
+        if (itemToRemove != null) {
+            items.remove(itemToRemove);
         }
     }
 
@@ -72,6 +103,7 @@ class Mapa extends JPanel implements KeyListener{
         if (keyCode == KeyEvent.VK_D || keyCode == KeyEvent.VK_RIGHT) {  // Arriba
             if (x < size_x - 1) personaje.mover_derecha(this);
         }
+        verificarColisionConItems(personaje);
         repaint(); // Redibujar el panel despues de mover al personaje
     }
 
@@ -94,5 +126,12 @@ class Mapa extends JPanel implements KeyListener{
             casilla.dibujar(g, tamanho_celda);
         }
         personaje.dibujar(g,tamanho_celda);
+        for (Item item : items) {
+            if (item instanceof PosionSalud) {
+                //item.render(g,tamanho_celda);
+                g.setColor(Color.GREEN);
+                g.fillOval(item.GetX() * tamanho_celda, item.GetY() * tamanho_celda, tamanho_celda, tamanho_celda);
+            }
+        }
     }
 }

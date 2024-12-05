@@ -6,20 +6,22 @@ import javax.swing.ImageIcon;
 import java.io.File;
 import java.io.FileNotFoundException;
 
-class Personaje{
+public class Personaje{
     private int x_pos_inicial;
     private int y_pos_inicial;
+    private int salud;
     private ArrayList<ArrayList<Image>> spritesPorDireccion;
     //private ArrayList<Image> sprites;
     private int sprite_indice;
-    private char elemento;
+    //private char elemento;
     private String direccionActual;
 
     public Personaje(){
         x_pos_inicial = 6;
         y_pos_inicial = 14;
         direccionActual = "abajo";
-        elemento = 'P';
+        salud = 50;
+        //elemento = 'P';
 
         spritesPorDireccion = new ArrayList<>(4);
         try{
@@ -47,6 +49,11 @@ class Personaje{
 
     public int GetPosY_Inicial(){
         return this.y_pos_inicial;
+    }
+    
+    public void aumentarSalud(int cantidad) {
+        salud += cantidad;
+        System.out.println("Nueva salud: " + salud);
     }
 
     public void cargarSpritesPorDireccion(String carpeta, String direccion) throws FileNotFoundException{
