@@ -22,10 +22,14 @@ class Personaje{
         elemento = 'P';
 
         spritesPorDireccion = new ArrayList<>(4);
+        try{
         cargarSpritesPorDireccion("Sprites/Personaje Pokemon/Arriba", "arriba");
         cargarSpritesPorDireccion("Sprites/Personaje Pokemon/Abajo", "abajo");
         cargarSpritesPorDireccion("Sprites/Personaje Pokemon/Izquierda", "izquierda");
         cargarSpritesPorDireccion("Sprites/Personaje Pokemon/Derecha", "derecha");
+        } catch (FileNotFoundException e){
+            System.err.println("Error al cargar sprites: " + e.getMessage());
+        }
         sprite_indice=0;
     }
 
@@ -50,6 +54,7 @@ class Personaje{
         
         for (int i=1;i<=4;i++){
             String nombreArchivo = carpeta + "/movimiento_" + i + ".png";
+            // Se agrega un File para obtener el archivo y comprobar si existe , esto es de prueba ya que se esta aprendiendo a usar
             File archivo = new File(nombreArchivo);
             if(archivo.exists()){
                 sprites.add(new ImageIcon(nombreArchivo).getImage());
@@ -94,7 +99,6 @@ class Personaje{
     public void mover_arriba(Mapa map){
         int x = GetPosX_Inicial();
         int y = GetPosY_Inicial();
-        //Casilla futura_casilla = new Casilla();
         Casilla futura_casilla = map.ObtenerCasilla(x,y-1);
         if (futura_casilla != null){
             System.out.println("Movimiento Arriba Elemento de la casilla futura: " + futura_casilla.GetElemento() + " Posicion en X = " + futura_casilla.GetX()+ " Posicion en Y = " + futura_casilla.GetY());
@@ -109,7 +113,6 @@ class Personaje{
     public void mover_derecha(Mapa map){
         int x = GetPosX_Inicial();
         int y = GetPosY_Inicial();
-        //Casilla futura_casilla = new Casilla();
         Casilla futura_casilla = map.ObtenerCasilla(x+1,y);
         if (futura_casilla != null){
             System.out.println("Movimiento Derecha Elemento de la casilla futura: " + futura_casilla.GetElemento() + " Posicion en X = " + futura_casilla.GetX()+ " Posicion en Y = " + futura_casilla.GetY());
@@ -124,7 +127,6 @@ class Personaje{
     public void mover_izquierda(Mapa map){
         int x = GetPosX_Inicial();
         int y = GetPosY_Inicial();
-        //Casilla futura_casilla = new Casilla();
         Casilla futura_casilla = map.ObtenerCasilla(x-1,y);
         if (futura_casilla != null){
             System.out.println("Movimiento Izquierda Elemento de la casilla futura: " + futura_casilla.GetElemento() + " Posicion en X = " + futura_casilla.GetX()+ " Posicion en Y = " + futura_casilla.GetY());
@@ -139,7 +141,6 @@ class Personaje{
     public void mover_abajo(Mapa map){
         int x = GetPosX_Inicial();
         int y = GetPosY_Inicial();
-        //Casilla futura_casilla = new Casilla();
         Casilla futura_casilla = map.ObtenerCasilla(x,y+1);
         if (futura_casilla != null){
             System.out.println("Movimiento Abajo Elemento de la casilla futura: " + futura_casilla.GetElemento() + " Posicion en X = " + futura_casilla.GetX()+ " Posicion en Y = " + futura_casilla.GetY());
