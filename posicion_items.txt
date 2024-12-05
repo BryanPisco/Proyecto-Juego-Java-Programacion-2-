@@ -1,2 +1,4 @@
 Salud 1 13 10
 Salud 5 2 20
+Mana 12 15 10
+Mana 14 7 20

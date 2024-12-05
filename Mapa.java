@@ -52,6 +52,12 @@ public class Mapa extends JPanel implements KeyListener{
                 item.leer(arch);
                 items.add(item);
             }
+
+            if (tipo.compareTo("Mana") == 0) {
+                item = new PosionMana();
+                item.leer(arch);
+                items.add(item);
+            }
         }
     }
 
@@ -122,16 +128,10 @@ public class Mapa extends JPanel implements KeyListener{
     @Override
     protected void paintComponent(Graphics g){
         super.paintComponent(g);
-        for (Casilla casilla : casillas) {
-            casilla.dibujar(g, tamanho_celda);
-        }
+        for (Casilla casilla : casillas) casilla.dibujar(g, tamanho_celda);
         personaje.dibujar(g,tamanho_celda);
         for (Item item : items) {
-            if (item instanceof PosionSalud) {
-                //item.render(g,tamanho_celda);
-                g.setColor(Color.GREEN);
-                g.fillOval(item.GetX() * tamanho_celda, item.GetY() * tamanho_celda, tamanho_celda, tamanho_celda);
-            }
+            item.render(g,tamanho_celda);
         }
     }
 }

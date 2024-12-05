@@ -10,6 +10,7 @@ public class Personaje{
     private int x_pos_inicial;
     private int y_pos_inicial;
     private int salud;
+    private int mana;
     private ArrayList<ArrayList<Image>> spritesPorDireccion;
     //private ArrayList<Image> sprites;
     private int sprite_indice;
@@ -21,6 +22,7 @@ public class Personaje{
         y_pos_inicial = 14;
         direccionActual = "abajo";
         salud = 50;
+        mana = 50;
         //elemento = 'P';
 
         spritesPorDireccion = new ArrayList<>(4);
@@ -54,6 +56,11 @@ public class Personaje{
     public void aumentarSalud(int cantidad) {
         salud += cantidad;
         System.out.println("Nueva salud: " + salud);
+    }
+
+    public void aumentarMana(int cantidad) {
+        mana += cantidad;
+        System.out.println("Nuevo Mana: " + mana);
     }
 
     public void cargarSpritesPorDireccion(String carpeta, String direccion) throws FileNotFoundException{

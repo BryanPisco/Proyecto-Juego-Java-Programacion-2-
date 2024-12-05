@@ -2,29 +2,29 @@ import java.util.Scanner;
 import javax.swing.*;
 import java.awt.*;
 
-public class PosionSalud extends Item{
-    private int aumento_salud;
+public class PosionMana extends Item{
+    private int aumento_mana;
     private Image sprite;
 
-    public void SetAumento(int aumento_salud){
-        this.aumento_salud = aumento_salud;
+    public void SetAumento(int aumento_mana){
+        this.aumento_mana = aumento_mana;
     }
 
     public int GetAumento(){
-        return this.aumento_salud;
+        return this.aumento_mana;
     }
 
     @Override
     public void leer(Scanner arch){
         super.leer(arch);
-        aumento_salud = arch.nextInt();
-        sprite = new ImageIcon("Sprites/Item/posion_vida.png").getImage();
+        aumento_mana = arch.nextInt();
+        sprite = new ImageIcon("Sprites/Item/posion_mana.png").getImage();
     }
 
     @Override
     public void interactuar(Personaje personaje){
-        personaje.aumentarSalud(aumento_salud);
-        System.out.println("Salud aumentada en: " + aumento_salud);
+        personaje.aumentarMana(aumento_mana);
+        System.out.println("Mana aumentada en: " + aumento_mana);
     }
 
     @Override
