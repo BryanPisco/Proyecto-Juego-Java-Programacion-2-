@@ -87,7 +87,6 @@ public class Mapa extends JPanel implements KeyListener{
         }
     }
 
-    // Implementacion del metodo keyPressed de KeyListener
     @Override
     public void keyPressed(KeyEvent key) {
         int x = personaje.GetPosX_Inicial();
@@ -110,10 +109,10 @@ public class Mapa extends JPanel implements KeyListener{
             if (x < size_x - 1) personaje.mover_derecha(this);
         }
         verificarColisionConItems(personaje);
-        repaint(); // Redibujar el panel despues de mover al personaje
+        repaint(); // Redibuja el panel despues de mover al personaje
     }
 
-    // Metodos vacios necesarios para implementar KeyListener
+    // Para KeyListener
     @Override
     public void keyReleased(KeyEvent e) {}
     @Override

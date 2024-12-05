@@ -87,15 +87,8 @@ public class Personaje{
     public void dibujar(Graphics g, int tamCelda){
         int direccionIndice = obtenerIndiceDireccion(direccionActual);
         g.drawImage(spritesPorDireccion.get(direccionIndice).get(sprite_indice), x_pos_inicial * tamCelda, y_pos_inicial * tamCelda, tamCelda, tamCelda, null);
-        
-        // g.setColor(Color.BLACK);
-        // g.fillRect(x_pos_inicial * tamCelda, y_pos_inicial * tamCelda, tamCelda, tamCelda);
-
         g.setColor(Color.BLACK);
         g.drawRect(x_pos_inicial * tamCelda, y_pos_inicial * tamCelda, tamCelda, tamCelda);
-
-        //g.setColor(Color.WHITE);
-        //g.drawString(String.valueOf(elemento), x_pos_inicial * tamCelda + tamCelda / 4, y_pos_inicial * tamCelda + tamCelda / 2);
     }
 
     public void alternarSprite(){
