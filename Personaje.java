@@ -4,6 +4,7 @@ import java.awt.Image;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import java.io.File;
+import java.io.FileNotFoundException;
 
 class Personaje{
     private int x_pos_inicial;
@@ -44,10 +45,10 @@ class Personaje{
         return this.y_pos_inicial;
     }
 
-    public void cargarSpritesPorDireccion(String carpeta, String direccion){
+    public void cargarSpritesPorDireccion(String carpeta, String direccion) throws FileNotFoundException{
         ArrayList<Image> sprites = new ArrayList<>(4);
         
-        for (int i = 1; i <= 4; i++){
+        for (int i=1;i<=4;i++){
             String nombreArchivo = carpeta + "/movimiento_" + i + ".png";
             File archivo = new File(nombreArchivo);
             if(archivo.exists()){
@@ -57,9 +58,9 @@ class Personaje{
             }
         }
         
-        if (sprites.size() == 4) {
+        if(sprites.size() == 4){
             spritesPorDireccion.add(sprites);
-        } else {
+        }else{
             System.out.println("No se cargaron correctamente todos los sprites para " + direccion);
         }
     }
